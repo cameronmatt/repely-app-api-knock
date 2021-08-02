@@ -4,12 +4,22 @@ class HomeController < ApplicationController
   
     # Public method
     def index
-      render json: { service: 'auth-api', status: 200 }
+        render json: { service: 'auth-api', status: 200 }
     end
     
     # Authorized only method
     def auth
-      render json: { status: 200, msg: "You are currently Logged-in as #{current_user.username}" }
+        puts "THIS IS THE CURRENT USER"
+        p current_user
+        #render json: { status: 200, msg: "CURRENT USER #{current_user.id} #{current_user.username} #{current_user.username}" }
+
+        render json:{ 
+            status: 200, 
+            user_id: current_user.id,
+            email: current_user.email, 
+            username: current_user.username,
+            avatar: current_user.avatar 
+            }
     end
   
   end

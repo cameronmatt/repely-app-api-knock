@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-    #before_action :authenticate_user, only: [:create]        
+    before_action :authenticate_user, only: [:create]        
     before_action :set_tickets, only: [:show, :destroy]
 
     def index
@@ -11,12 +11,12 @@ class TicketsController < ApplicationController
     def create
         # puts "TICKETS CONTROLLER USER"
         # p current_user
-        @ticket = Ticket.new(ticket_params)
-        #ticket = current_user.tickets.build(ticket_params)
-        if @ticket.save
-            render json: @ticket, status: 201
+        #ticket = Ticket.new(ticket_params)
+        ticket = current_user.tickets.build(ticket_params)
+        if ticket.save
+            render json: ticket, status: 201
         else
-            render json: {errors: @ticket.errors.full_message }, status: 422
+            render json: {errors: ticket.errors.full_message }, status: 422
         end
     end
 

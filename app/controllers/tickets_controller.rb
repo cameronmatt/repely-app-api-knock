@@ -4,14 +4,9 @@ class TicketsController < ApplicationController
 
     def index
         render json: Ticket.all
-        # puts "DO WE GET CURRENT USERRRRRRR"
-        # p current_user
     end
 
     def create
-        # puts "TICKETS CONTROLLER USER"
-        # p current_user
-        #ticket = Ticket.new(ticket_params)
         ticket = current_user.tickets.build(ticket_params)
         if ticket.save
             render json: ticket, status: 201

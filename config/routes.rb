@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :tickets do 
+    resources :comments
+  end
   post 'user_token' => 'user_token#create'
   resources :users
-  resources :tickets
   get 'userauth' => 'home#auth'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

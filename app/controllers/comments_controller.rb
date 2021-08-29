@@ -1,19 +1,12 @@
 class CommentsController < ApplicationController
     before_action :authenticate_user, only: [:create]  
-    #before_action :find_review
 
     def index
-        render json: Comment.all
+        render json: Comment.all.where(:ticket_id => params[:ticket_id])
     end
 
     def create
-        # if current_user.comments.nil?
-        #     current_user.comments = []
-        # end
-        # ticket = Ticket.find(params[:ticket_id].to_i)
-        # comment = current_user.comments.build(comment: params[:comment], ticket: ticket)
         comment = Comment.new(comment_params)
-        # comment.user_id = current_user.id
         if comment.save
             render json: comment, status: 201
         else
